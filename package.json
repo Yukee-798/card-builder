@@ -2,6 +2,7 @@
   "name": "card-builder",
   "version": "0.1.0",
   "private": true,
+  "main": "main.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
@@ -20,7 +21,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "ele": "electron .",
+    "dev": "concurrently \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm start\""
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +42,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.0",
+    "cross-env": "^7.0.3",
+    "electron": "^12.0.1",
+    "electron-devtools-installer": "^3.1.1",
+    "electron-is-dev": "^2.0.0",
+    "normalizr": "^3.6.1",
+    "redux-devtools-extension": "^2.13.9",
+    "wait-on": "^5.2.1"
   }
 }
