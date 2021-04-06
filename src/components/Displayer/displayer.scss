@@ -1,0 +1,94 @@
+.displayer-warp {
+    height: 100%;
+    border: #000000 1px solid;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .displayer-front {
+        width: 100%;
+        height: 100%;
+        border: black 1px solid;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+
+        .background {
+            width: 100%;
+            height: 100%;
+            // position: fixed;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .owner-photo {
+            width: 120px;
+            height: 65%;
+            border: black 1px solid;
+            margin-right: 20px;
+            z-index: 2000;
+        }
+
+        .owner-info {
+            width: 200px;
+            height: 65%;
+            // border: black 1px solid;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 2000;
+
+            &>div {
+                display: flex;
+                align-items: center;
+                border: black 1px solid;
+
+                .lable {
+                    display: inline-flex;
+                    justify-content: space-between;
+                    white-space: nowrap;
+                    flex-grow: 1;
+                    width: 45%;
+                }
+
+                // &>span {
+                //     display: inline-flex;
+                //     width: 39%;
+                //     justify-content: space-between;
+                //     // border: black 1px solid;
+                //     white-space: nowrap;
+
+                // }
+
+                .ant-input {
+                    flex-grow: 2;
+                    padding: 4px 5px;
+                }
+            }
+
+        }
+    }
+
+    .displayer-back {
+        width: 100%;
+        height: 100%;
+        border: black 1px solid;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hint {
+        z-index: -1;
+        position: absolute;
+        font-size: 96px;
+        color: #eee;
+    }
+}

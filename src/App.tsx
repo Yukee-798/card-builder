@@ -1,24 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { Row, Col, Button } from 'antd'
+import { DragDropContext, Draggable } from 'react-beautiful-dnd'
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined
+} from '@ant-design/icons';
+import './App.scss';
+import Displayer from './components/Displayer/displayer';
+import Console from './components/Console/console';
 
 function App() {
+
+  const [isPopConsole, setIsPopConsole] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Row>
+        <Col span={24}>
+          {/* <DragDropContext
+            onDragEnd={(r, p) => {console.log(r, p);}}
+          > */}
+            <Displayer />
+            <Console
+              isPop={isPopConsole}
+              onClose={() => {
+                setIsPopConsole(false);
+              }}
+            />
+
+            {/* <Draggable
+              draggableId='123'
+              
+            >
+              <div id='123'>231</div>
+            </Draggable> */}
+
+
+            <Button
+              className='float-btn'
+              icon={<MenuFoldOutlined />}
+              onClick={() => {
+                setIsPopConsole(true);
+              }}
+            >
+            </Button>
+
+
+          {/* </DragDropContext> */}
+        </Col>
+      </Row>
     </div>
   );
 }

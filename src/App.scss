@@ -1,0 +1,19 @@
+@import '~antd/dist/antd.css';
+.App,
+.ant-row,
+.ant-col,
+.console-warp,
+.displayer-warp {
+    height: 100%;
+}
+
+
+.App {
+    position: relative;
+}
+
+.float-btn {
+    top: 0;
+    right: 0;
+    position: absolute;
+}
