@@ -1,33 +1,30 @@
-import { IBaseProps } from '../../types';
+import { IBaseProps, IFile } from '../../types';
 import { Form, Input, Button, Drawer, Upload, message } from 'antd'
 import { InboxOutlined } from '@ant-design/icons';
-
 import './console.scss'
 import { fileHelper } from '../../utils';
-import { assetsPath } from '../../assets';
+
 
 
 interface IConsoleProps extends IBaseProps {
     isPop?: boolean;
     onClose?: () => void;
-
+    onFileUpload?: (file: IFile) => void;
+    onRemake?: () => void;
+    onCreate?: () => void;
 }
 
 
-interface IFile {
-    name: string;
-    path: string;
-    size: number;
-    type: string;
-    uid: string;
-    webkitRelativePath: string;
-}
+
 
 const Console: React.FC<IConsoleProps> = (props) => {
 
     const {
         isPop,
-        onClose
+        onClose,
+        onFileUpload,
+        onCreate,
+        onRemake
     } = props;
     return (
         <Drawer
@@ -39,19 +36,10 @@ const Console: React.FC<IConsoleProps> = (props) => {
             <div>
                 <Upload.Dragger
                     maxCount={3}
-                    customRequest={async ({ action, file, method, data, filename, headers, onProgress }) => {
-                        const fileInfo: IFile = file as any;
-                        const res = await fileHelper.readFile(fileInfo.path)
-
-                        try {
-                            fileHelper.writeFile('/Users/yukee-798/Downloads/daily/Electron_Project/card-builder/src/assets/'+ fileInfo.name, res);
-
-                        } catch (err) {
-                            console.log(err);
-                        }
-
+                    customRequest={async ({ file }) => {
+                        onFileUpload?.(file as unknown as IFile);
                     }}
-                    // action='/Users/yukee-798/Downloads/daily/Electron_Project/card-builder/src/assets'
+                    // action='https://api.uomg.com/api/image.baidu'
                     className='file-upload'
                     accept='.png,.jpg,.gif,.psd,.jpeg'
                 >
@@ -68,7 +56,23 @@ const Console: React.FC<IConsoleProps> = (props) => {
             </div>
 
 
-            {/* <Button>test</Button> */}
+            <Button 
+                className='console-btn'
+                onClick={() => {
+                    onRemake?.();
+                }}
+            >
+                重制
+            </Button>
+            <Button
+                className='console-btn'
+                type='primary'
+                onClick={() => {
+                    onCreate?.();
+                }}
+            >
+                生成
+            </Button>
         </Drawer>
     )
 }

@@ -1,36 +1,44 @@
-import { IBaseProps } from '../../types';
+import { IBaseProps, IFile } from '../../types';
 import { Image, Input } from 'antd'
-import Pic from '../../assets/pic.jpg';
 import './displayer.scss'
+import { useEffect } from 'react';
 
 
 interface IDisplayerProps extends IBaseProps {
-
+    loadPic: Pick<IFile, 'name' | 'path'>[]
 }
 
 
 const Displayer: React.FC<IDisplayerProps> = (props) => {
+
+    const { loadPic } = props;
+
+
+    useEffect(() => {
+        console.log(loadPic);
+    }, [loadPic])
+
+
     return (
         <div
             className='displayer-warp'
         >
             <div className='displayer-front'>
 
-                <div className='hint'>正面</div>
-                <div
-                    className='background'
-                >
-
-                    {/* <Image src={Pic}/> */}
-
+                <div className='owner-photo'>
+                    {/* <Image src={loadPic ? loadPic[0]?.path : ''} /> */}
+                    <Image
+                        src={loadPic[0]?.name && process.env.PUBLIC_URL + 'cache/' + loadPic[0]?.name}
+                        
+                    />
                 </div>
 
 
-
-                <div
-                    className='owner-photo'
-                >
-
+                <div className='hint'>正面</div>
+                <div className='background'>
+                    <Image
+                        src={loadPic[1]?.name && process.env.PUBLIC_URL + 'cache/' + loadPic[1]?.name}
+                    />
                 </div>
 
 
@@ -86,6 +94,11 @@ const Displayer: React.FC<IDisplayerProps> = (props) => {
 
             <div className='displayer-back'>
                 <div className='hint'>背面</div>
+                <div className='background'>
+                    <Image
+                        src={loadPic[2]?.name && process.env.PUBLIC_URL + 'cache/' + loadPic[2]?.name}
+                    />
+                </div>
             </div>
         </div>
     )

@@ -5,3 +5,14 @@ export interface IBaseProps {
     style?: React.CSSProperties;
     
 }
+
+
+export interface IFile {
+    name: string;
+    path: string;
+    size: number;
+    type: string;
+    uid: string;
+    webkitRelativePath: string;
+}
+
