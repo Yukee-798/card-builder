@@ -23,10 +23,9 @@ const Displayer: React.FC<IDisplayerProps> = (props) => {
         <div
             className='displayer-warp'
         >
-            <div className='displayer-front'>
+            <div className='displayer-front' id='target-img'>
 
                 <div className='owner-photo'>
-                    {/* <Image src={loadPic ? loadPic[0]?.path : ''} /> */}
                     <Image
                         src={loadPic[0]?.name && process.env.PUBLIC_URL + 'cache/' + loadPic[0]?.name}
                         
@@ -48,7 +47,6 @@ const Displayer: React.FC<IDisplayerProps> = (props) => {
                 >
                     <div>
                         <div className='lable'>
-                            {/* <span><span>姓</span>名</span>: */}
                             <span>姓</span>
                             <span>名:</span>
                         </div>
@@ -59,7 +57,6 @@ const Displayer: React.FC<IDisplayerProps> = (props) => {
                         <div className='lable'>
                             <span>ID</span>
                             <span>号:</span>
-                            {/* <span><span>ID</span>号</span>: */}
                         </div>
 
                         <Input bordered={false} />
@@ -76,7 +73,6 @@ const Displayer: React.FC<IDisplayerProps> = (props) => {
                         <div className='lable'>
                             <span>专</span>
                             <span>业:</span>
-                            {/* <span><span>专</span>业</span>: */}
                         </div>
 
                         <Input bordered={false} />
@@ -92,14 +88,14 @@ const Displayer: React.FC<IDisplayerProps> = (props) => {
                 </div>
             </div>
 
-            <div className='displayer-back'>
+            {/* <div className='displayer-back'>
                 <div className='hint'>背面</div>
                 <div className='background'>
                     <Image
                         src={loadPic[2]?.name && process.env.PUBLIC_URL + 'cache/' + loadPic[2]?.name}
                     />
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

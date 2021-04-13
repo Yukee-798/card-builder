@@ -35,28 +35,29 @@ const Console: React.FC<IConsoleProps> = (props) => {
         >
             <div>
                 <Upload.Dragger
-                    maxCount={3}
+                    maxCount={2}
                     customRequest={async ({ file }) => {
                         onFileUpload?.(file as unknown as IFile);
                     }}
                     // action='https://api.uomg.com/api/image.baidu'
                     className='file-upload'
                     accept='.png,.jpg,.gif,.psd,.jpeg'
+                    itemRender={() => <></>}
                 >
                     <p className='upload-icon'>
                         <InboxOutlined />
                     </p>
                     <p className='upload-text'>
                         点击或将图片拖到该区域以上传
-                </p>
+                    </p>
                     <p className='upload-hint'>
-                        注：请按照 <strong>照片</strong>、<strong>正面</strong>、<strong>背面</strong> 的顺序上传
-                </p>
+                        注：请按照 <strong>照片</strong>、<strong>正面</strong> 的顺序上传
+                    </p>
                 </Upload.Dragger>
             </div>
 
 
-            <Button 
+            <Button
                 className='console-btn'
                 onClick={() => {
                     onRemake?.();

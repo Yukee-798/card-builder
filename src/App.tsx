@@ -8,8 +8,9 @@ import {
 import './App.scss';
 import Displayer from './components/Displayer/displayer';
 import Console from './components/Console/console';
+import domtoimage from 'dom-to-image';
 import { IFile } from './types';
-
+import { saveAs } from 'file-saver';
 
 const { ipcRenderer } = window.require('electron');
 ipcRenderer.on('reply', (event: any, args: any) => {
@@ -44,12 +45,18 @@ function App() {
             }}
 
             onCreate={() => {
-
+              if (picList.length < 2) {
+                window.alert('请上传完整的图片数量！')
+              } else {
+                domtoimage.toBlob(window.document.getElementById('target-img') as any)
+                  .then(function (blob) {
+                    saveAs(blob, 'my_card.png');
+                  });
+              }
             }}
 
-            // 当文件数量达到3个后，继续上传文件不会再执行回调
+            // 当文件数量达到2个后，继续上传文件不会再执行回调
             onFileUpload={(file) => {
-
               const mFile = {
                 path: file.path,
                 name: file.name
