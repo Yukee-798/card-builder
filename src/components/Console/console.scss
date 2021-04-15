@@ -1,5 +1,9 @@
+.ant-drawer-content-wrapper {
+    z-index: 3000;
+    // border: black 1px solid;
+}
 .console {
-    z-index: 2001;
+    z-index: 3000;
     display: flex;
     flex-direction: column;
     align-items: center;
