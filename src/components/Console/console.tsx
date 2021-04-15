@@ -1,10 +1,7 @@
 import { IBaseProps, IFile } from '../../types';
-import { Form, Input, Button, Drawer, Upload, message } from 'antd'
+import { Button, Drawer, Upload } from 'antd'
 import { InboxOutlined } from '@ant-design/icons';
 import './console.scss'
-import { fileHelper } from '../../utils';
-
-
 
 interface IConsoleProps extends IBaseProps {
     isPop?: boolean;
@@ -13,9 +10,6 @@ interface IConsoleProps extends IBaseProps {
     onRemake?: () => void;
     onCreate?: () => void;
 }
-
-
-
 
 const Console: React.FC<IConsoleProps> = (props) => {
 
@@ -37,9 +31,9 @@ const Console: React.FC<IConsoleProps> = (props) => {
                 <Upload.Dragger
                     maxCount={2}
                     customRequest={async ({ file }) => {
+                        console.log('文件上传');
                         onFileUpload?.(file as unknown as IFile);
                     }}
-                    // action='https://api.uomg.com/api/image.baidu'
                     className='file-upload'
                     accept='.png,.jpg,.gif,.psd,.jpeg'
                     itemRender={() => <></>}
