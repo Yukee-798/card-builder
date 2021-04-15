@@ -28,17 +28,14 @@ const fileHelper = {
 
 const CACHE_PATH_ROOT = join(app.getAppPath(), 'public/cache')
 
-
-// export const ASSETS_PATH = join(app.getAppPath(), 'src/assets');
-
 app.on('ready', () => {
     let mainWindow = new BrowserWindow({
-        width: 475,
-        height: 613,
-        minWidth: 475,
-        maxWidth: 475,
-        minHeight: 613,
-        maxHeight: 613,
+        width: 510,
+        height: 413,
+        minWidth: 510,
+        maxWidth: 510,
+        minHeight: 413,
+        maxHeight: 413,
         maximizable: false,
         webPreferences: {
             nodeIntegration: true,
@@ -82,7 +79,7 @@ app.on('ready', () => {
     })
 
 
-    const urlLocation = isDev ? 'http://localhost:3000' : 'dummyurl';
+    const urlLocation = isDev ? 'http://localhost:3000' : `file://${join(__dirname, './build/index.html')}`;
     mainWindow.loadURL(urlLocation);
 
 });
