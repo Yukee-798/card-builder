@@ -25,7 +25,7 @@ const Displayer: React.FC<IDisplayerProps> = (props) => {
                 </div>
 
 
-                <div className='hint'>正面</div>
+                <div className='hint'>背景</div>
                 <div className='background'>
                     <Image
                         src={loadPic[1]?.name && process.env.PUBLIC_URL + 'cache/' + loadPic[1]?.name}
