@@ -1,6 +1,6 @@
 {
   "name": "card-builder",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "An automated production card application",
   "author": {
     "name": "yukee-798",
@@ -38,13 +38,18 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "ele": "electron .",
+    "buildMain": "webpack",
+    "onlyEle": "nodemon --watch main.js --watch src/menuTemplate.js --exec \"electron .\"",
     "dev": "concurrently \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm start\"",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "prepack": "npm run build",
-    "predist": "npm run build"
+    "release": "electron-builder",
+    "prerelease": "npm run build && npm run buildMain",
+    "prepack": "npm run build && npm run buildMain",
+    "predist": "npm run build && npm run buildMain"
   },
+
+
   "homepage": "./",
   "build": {
     "appId": "card-builder",
@@ -57,7 +62,53 @@
       "main.js",
       "src/**/*"
     ],
-    "extends": null
+        "directories": {
+      "buildResources": "assets"
+    },
+    "extraMetadata": {
+      "main": "./build/main.js"
+    },
+    "publish": ["github"],
+    "extends": null,
+    "mac": {
+      "category": "public.app-category.productivity",
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "dmg": {
+      "background": "assets/appdmg.png",
+      "icon": "assets/icon.icns",
+      "iconSize": 100,
+      "contents": [
+        {
+          "x": 380,
+          "y": 280,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 110,
+          "y": 280,
+          "type": "file"
+        }
+      ],
+      "window": {
+        "width": 500,
+        "height": 500
+      }
+    },
+    "win": {
+      "target": [
+        "msi", "nsis"
+      ],
+      "icon": "assets/icon.ico",
+      "artifactName": "${productName}-Web-Setup-${version}.${ext}",
+      "publisherName": "Viking Zhang"
+    },
+    "nsis": {
+      "allowToChangeInstallationDirectory": true,
+      "oneClick": false,
+      "perMachine": false
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -80,8 +131,8 @@
   "devDependencies": {
     "concurrently": "^6.0.0",
     "cross-env": "^7.0.3",
-    "electron": "^12.0.1",
-    "electron-builder": "^22.10.5",
+    "electron": "^5.0.6",
+    "electron-builder": "^21.2.0",
     "wait-on": "^5.2.1"
   }
 }
