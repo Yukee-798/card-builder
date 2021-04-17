@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React ,{ useState } from 'react';
 import { Row, Col, Button } from 'antd'
 import { MenuFoldOutlined } from '@ant-design/icons';
 import Displayer from './components/Displayer/displayer';

@@ -1,3 +1,4 @@
+import React from 'react';
 import { IBaseProps, IFile } from '../../types';
 import { Image, Input } from 'antd'
 import './displayer.scss'

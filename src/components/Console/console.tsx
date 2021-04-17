@@ -1,3 +1,4 @@
+import React from 'react';
 import { IBaseProps, IFile } from '../../types';
 import { Button, Drawer, Upload } from 'antd'
 import { InboxOutlined } from '@ant-design/icons';
