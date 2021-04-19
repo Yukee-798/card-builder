@@ -44,7 +44,6 @@
     "prepack": "npm run build",
     "predist": "npm run build"
   },
-  "homepage": "./",
   "build": {
     "appId": "card-builder",
     "productName": "card-builder",
