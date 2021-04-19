@@ -7,7 +7,6 @@ import domtoimage from 'dom-to-image';
 import { IFile } from './types';
 import { saveAs } from 'file-saver';
 import './App.scss';
-
 const { ipcRenderer } = window.require('electron');
 
 function App() {

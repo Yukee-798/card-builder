@@ -20,14 +20,18 @@
     "@types/react-dom": "^16.8.6",
     "antd": "^4.15.1",
     "dom-to-image": "^2.6.0",
-    "electron-is-dev": "^1.1.0",
     "file-saver": "^2.0.5",
     "node-sass": "^4.14.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
-    "typescript": "^4.2.3",
-    "web-vitals": "^1.1.1"
+    "typescript": "^3.2.5",
+    "concurrently": "^4.1.1",
+    "cross-env": "^5.2.0",
+    "electron": "^5.0.6",
+    "electron-builder": "^21.2.0",
+    "wait-on": "^3.3.0",
+    "electron-is-dev": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,74 +39,18 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "buildMain": "webpack",
-    "onlyEle": "nodemon --watch main.js --watch src/menuTemplate.js --exec \"electron .\"",
     "dev": "concurrently \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm start\"",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "release": "electron-builder",
-    "prerelease": "npm run build && npm run buildMain",
-    "prepack": "npm run build && npm run buildMain",
-    "predist": "npm run build && npm run buildMain"
+    "prepack": "npm run build",
+    "predist": "npm run build"
   },
-
-
   "homepage": "./",
   "build": {
     "appId": "card-builder",
     "productName": "card-builder",
     "copyright": "Copyright © 2021 ${author}",
-    "files": [
-      "build/**/*",
-      "node_modules/**/*",
-      "package.json"
-    ],
-    "directories": {
-      "buildResources": "assets"
-    },
-    "extraMetadata": {
-      "main": "./build/main.js"
-    },
-    "publish": ["github"],
-    "extends": null,
-    "mac": {
-      "category": "public.app-category.productivity",
-      "artifactName": "${productName}-${version}-${arch}.${ext}"
-    },
-    "dmg": {
-      "background": "assets/appdmg.png",
-      "icon": "assets/icon.icns",
-      "iconSize": 100,
-      "contents": [
-        {
-          "x": 380,
-          "y": 280,
-          "type": "link",
-          "path": "/Applications"
-        },
-        {
-          "x": 110,
-          "y": 280,
-          "type": "file"
-        }
-      ],
-      "window": {
-        "width": 500,
-        "height": 500
-      }
-    },
-    "win": {
-      "target": [
-        "msi", "nsis"
-      ],
-      "icon": "assets/icon.ico",
-      "artifactName": "${productName}-Web-Setup-${version}.${ext}",
-      "publisherName": "Viking Zhang"
-    },
-    "nsis": {
-      "allowToChangeInstallationDirectory": true,
-      "oneClick": false,
-      "perMachine": false
-    }
+    "extends": null
   },
   "eslintConfig": {
     "extends": [
@@ -121,12 +69,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "concurrently": "^4.1.1",
-    "cross-env": "^5.2.0",
-    "electron": "^5.0.6",
-    "electron-builder": "^21.2.0",
-    "wait-on": "^3.3.0"
   }
 }
