@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IBaseProps, IFile } from '../../types';
 import { Image, Input } from 'antd'
 import './displayer.scss'
@@ -11,6 +11,13 @@ interface IDisplayerProps extends IBaseProps {
 const Displayer: React.FC<IDisplayerProps> = (props) => {
 
     const { loadPic } = props;
+
+
+
+    useEffect(() => {
+        console.log(loadPic[0]?.name && process.env.PUBLIC_URL + 'cache/' + loadPic[0]?.name);
+    })
+
 
     return (
         <div
