@@ -8,6 +8,7 @@ const pfs = require('fs').promises;
 const {
     join
 } = require('path')
+const fs = require('fs')
 
 
 const fileHelper = {
@@ -26,7 +27,13 @@ const fileHelper = {
 };
 
 
-const CACHE_PATH_ROOT = join(app.getAppPath(), 'public/cache')
+const makeDir = (path) => {
+    fs.existsSync(path) ? '' : fs.mkdirSync(path)
+}
+makeDir(`${app.getPath('appData')}\\membership`)
+
+
+const CACHE_PATH_ROOT = join(app.getPath('appData'), '\\membership')
 
 app.on('ready', () => {
     let mainWindow = new BrowserWindow({
@@ -40,7 +47,8 @@ app.on('ready', () => {
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
-            enableRemoteModule: true
+            enableRemoteModule: true,
+            webSecurity: false
         }
     });
 
@@ -58,7 +66,7 @@ app.on('ready', () => {
         }
     })
 
-    ipcMain.on('cacheFile', async (event, objJSON) => {
+    ipcMain.on('cacheFile', async(event, objJSON) => {
         const {
             picList,
             file
