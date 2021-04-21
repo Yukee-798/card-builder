@@ -1,83 +1,131 @@
 {
-    "name": "card-builder",
-    "version": "1.0.0",
-    "description": "An automated production card application",
-    "author": {
-        "name": "yukee-798",
-        "email": "yukee798@gmail.com"
+  "name": "card-builder",
+  "version": "1.0.0",
+  "description": "An automated production card application",
+  "author": {
+    "name": "yukee-798",
+    "email": "yukee798@gmail.com"
+  },
+  "repository": {
+    "url": "https://github.com/Yukee-798/card-builder"
+  },
+  "private": true,
+  "main": "main.js",
+  "dependencies": {
+    "@ant-design/icons": "^4.6.2",
+    "@types/dom-to-image": "^2.6.2",
+    "@types/file-saver": "^2.0.2",
+    "antd": "^4.15.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "dev": "concurrently \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm start\"",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "prepack": "npm run build",
+    "predist": "npm run build"
+  },
+  "homepage": "./",
+  "build": {
+    "appId": "card-builder",
+    "productName": "card-builder",
+    "copyright": "Copyright © 2021 ${author}",
+    "extends": null,
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "public/**/*",
+      "main.js",
+      "./src",
+      "package.json"
+    ],
+
+    "directories": {
+      "buildResources": "assets"
     },
-    "repository": {
-        "url": "https://github.com/Yukee-798/card-builder"
+    "extraMetadata": {
+      "main": "./build/main.js"
     },
-    "private": true,
-    "main": "main.js",
-    "dependencies": {
-        "@ant-design/icons": "^4.6.2",
-        "@types/dom-to-image": "^2.6.2",
-        "@types/file-saver": "^2.0.2",
-        "@types/node": "^12.20.7",
-        "@types/react": "^16.8.6",
-        "@types/react-dom": "^16.8.6",
-        "antd": "^4.15.1",
-        "concurrently": "^4.1.1",
-        "cross-env": "^5.2.0",
-        "dom-to-image": "^2.6.0",
-        "electron-is-dev": "^1.1.0",
-        "electron-store": "^8.0.0",
-        "file-saver": "^2.0.5",
-        "node-sass": "^4.14.1",
-        "react": "^16.8.6",
-        "react-dom": "^16.8.6",
-        "react-scripts": "3.0.1",
-        "typescript": "^3.2.5",
-        "wait-on": "^3.3.0"
+
+    "publish": ["github"],
+
+    "mac": {
+      "category": "public.app-category.productivity",
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
     },
-    "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject",
-        "dev": "concurrently \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm start\"",
-        "pack": "electron-builder --dir",
-        "dist": "electron-builder",
-        "prepack": "npm run build",
-        "predist": "npm run build"
+    "dmg": {
+      "background": "assets/appdmg.png",
+      "icon": "assets/icon.icns",
+      "iconSize": 100,
+      "contents": [{
+          "x": 380,
+          "y": 280,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 110,
+          "y": 280,
+          "type": "file"
+        }
+      ],
+      "window": {
+        "width": 500,
+        "height": 500
+      }
     },
-    "homepage": "./",
-    "build": {
-        "appId": "card-builder",
-        "productName": "card-builder",
-        "copyright": "Copyright © 2021 ${author}",
-        "extends": null,
-        "files": [
-            "build/**/*",
-            "node_modules/**/*",
-            "public/**/*",
-            "main.js",
-            "./src",
-            "package.json"
-        ]
+    "win": {
+      "target": [
+        "msi", "nsis"
+      ],
+      "icon": "assets/icon.ico",
+      "artifactName": "${productName}-Web-Setup-${version}.${ext}",
+      "publisherName": "kjl and kll"
     },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    },
-    "devDependencies": {
-        "electron": "^5.0.6",
-        "electron-builder": "^21.2.0"
+    "nsis": {
+      "allowToChangeInstallationDirectory": true,
+      "oneClick": false,
+      "perMachine": false
     }
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.1",
+    "cross-env": "^5.2.0",
+    "dom-to-image": "^2.6.0",
+    "electron-is-dev": "^1.1.0",
+    "electron-store": "^8.0.0",
+    "file-saver": "^2.0.5",
+    "node-sass": "^4.14.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1",
+    "typescript": "^3.2.5",
+    "wait-on": "^3.3.0",
+    "@types/node": "^12.20.7",
+    "@types/react": "^16.8.6",
+    "@types/react-dom": "^16.8.6",
+    "electron": "^5.0.6",
+    "electron-builder": "^21.2.0"
+  }
 }
