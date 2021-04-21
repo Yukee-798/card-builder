@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { PresetColorTypes } from '../_util/colors'; // eslint-disable-next-line import/prefer-default-export\n\nexport function isPresetColor(color) {\n  return PresetColorTypes.indexOf(color) !== -1;\n}","map":null,"metadata":{},"sourceType":"module"}

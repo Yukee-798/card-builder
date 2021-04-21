@@ -3,14 +3,16 @@ import { IBaseProps, IFile } from '../../types';
 import { Image, Input } from 'antd'
 import './displayer.scss'
 
+const {app} = window.require('electron').remote
+
 interface IDisplayerProps extends IBaseProps {
     loadPic: Pick<IFile, 'name' | 'path'>[]
 }
 
 
 const Displayer: React.FC<IDisplayerProps> = (props) => {
-
     const { loadPic } = props;
+    
 
     return (
         <div
@@ -20,7 +22,7 @@ const Displayer: React.FC<IDisplayerProps> = (props) => {
 
                 <div className='owner-photo'>
                     <Image
-                        src={loadPic[0]?.name && process.env.PUBLIC_URL + 'cache/' + loadPic[0]?.name}
+                        src={loadPic[0]?.name && app.getPath('appData') + '\\membership\\' + loadPic[0]?.name}
                         preview={false}
                     />
                 </div>
@@ -29,7 +31,7 @@ const Displayer: React.FC<IDisplayerProps> = (props) => {
                 <div className='hint'>背景</div>
                 <div className='background'>
                     <Image
-                        src={loadPic[1]?.name && process.env.PUBLIC_URL + 'cache/' + loadPic[1]?.name}
+                        src={loadPic[1]?.name && app.getPath('appData') + '\\membership\\' + loadPic[1]?.name}
                         preview={false}
                     />
                 </div>
