@@ -42,10 +42,18 @@
     "prepack": "npm run build",
     "predist": "npm run build"
   },
+  "homepage": "./",
   "build": {
     "appId": "card-builder",
     "productName": "card-builder",
     "copyright": "Copyright © 2021 ${author}",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "main.js",
+      "./src",
+      "package.json"
+    ],
     "extends": null
   },
   "eslintConfig": {
