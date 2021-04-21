@@ -12,10 +12,11 @@
   "private": true,
   "main": "main.js",
   "dependencies": {
-    "@ant-design/icons": "^4.6.2",
     "@types/dom-to-image": "^2.6.2",
     "@types/file-saver": "^2.0.2",
-    "antd": "^4.15.1"
+    "electron-is-dev": "^1.1.0",
+    "dom-to-image": "^2.6.0",
+    "file-saver": "^2.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,10 +47,6 @@
     "directories": {
       "buildResources": "assets"
     },
-    "extraMetadata": {
-      "main": "./build/main.js"
-    },
-
     "publish": ["github"],
 
     "mac": {
@@ -110,12 +107,10 @@
     ]
   },
   "devDependencies": {
+    "@ant-design/icons": "^4.6.2",
+    "antd": "^4.15.1",
     "concurrently": "^4.1.1",
     "cross-env": "^5.2.0",
-    "dom-to-image": "^2.6.0",
-    "electron-is-dev": "^1.1.0",
-    "electron-store": "^8.0.0",
-    "file-saver": "^2.0.5",
     "node-sass": "^4.14.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
