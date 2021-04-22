@@ -45,7 +45,50 @@
             "main.js",
             "./src",
             "package.json"
-        ]
+        ],
+        "directories": {
+            "buildResources": "assets"
+        },
+        "publish": ["github"],
+
+        "mac": {
+            "category": "public.app-category.productivity",
+            "artifactName": "${productName}-${version}-${arch}.${ext}"
+        },
+        "dmg": {
+            "background": "assets/appdmg.png",
+            "icon": "assets/icon.icns",
+            "iconSize": 100,
+            "contents": [{
+                    "x": 380,
+                    "y": 280,
+                    "type": "link",
+                    "path": "/Applications"
+                },
+                {
+                    "x": 110,
+                    "y": 280,
+                    "type": "file"
+                }
+            ],
+            "window": {
+                "width": 500,
+                "height": 500
+            }
+        },
+        "win": {
+            "target": [
+                "msi", "nsis"
+            ],
+            "icon": "assets/icon.ico",
+            "artifactName": "${productName}-Web-Setup-${version}.${ext}",
+            "publisherName": "kjl and kll"
+        },
+        "nsis": {
+            "allowToChangeInstallationDirectory": true,
+            "oneClick": false,
+            "perMachine": false
+        }
     },
     "eslintConfig": {
         "extends": [
