@@ -30,10 +30,10 @@ const fileHelper = {
 const makeDir = (path) => {
     fs.existsSync(path) ? '' : fs.mkdirSync(path)
 }
-makeDir(`${app.getPath('appData')}\\membership`)
+makeDir(join(app.getPath('appData'), 'membership'));
 
 
-const CACHE_PATH_ROOT = join(app.getPath('appData'), '\\membership')
+const CACHE_PATH_ROOT = join(app.getPath('appData'), 'membership')
 
 app.on('ready', () => {
     let mainWindow = new BrowserWindow({
