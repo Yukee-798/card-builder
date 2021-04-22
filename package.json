@@ -22,9 +22,9 @@
         "file-saver": "^2.0.5"
     },
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
+        "start": "react-app-rewired start",
+        "build": "react-app-rewired build",
+        "test": "react-app-rewired test",
         "eject": "react-scripts eject",
         "dev": "concurrently \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm start\"",
         "pack": "electron-builder --dir",
@@ -49,8 +49,9 @@
         "directories": {
             "buildResources": "assets"
         },
-        "publish": ["github"],
-
+        "publish": [
+            "github"
+        ],
         "mac": {
             "category": "public.app-category.productivity",
             "artifactName": "${productName}-${version}-${arch}.${ext}"
@@ -78,7 +79,8 @@
         },
         "win": {
             "target": [
-                "msi", "nsis"
+                "msi",
+                "nsis"
             ],
             "icon": "assets/icon.ico",
             "artifactName": "${productName}-Web-Setup-${version}.${ext}",
@@ -112,14 +114,17 @@
         "@ant-design/icons": "^4.6.2",
         "@types/react": "^16.8.6",
         "@types/react-dom": "^16.8.6",
+        "antd": "^4.15.1",
+        "babel-plugin-import": "^1.13.3",
+        "customize-cra": "^1.0.0",
+        "electron": "^5.0.6",
+        "electron-builder": "^21.2.0",
+        "node-sass": "^4.14.1",
         "react": "^16.8.6",
+        "react-app-rewired": "^2.1.8",
         "react-dom": "^16.8.6",
         "react-scripts": "3.0.1",
         "typescript": "^3.2.5",
-        "wait-on": "^3.3.0",
-        "node-sass": "^4.14.1",
-        "antd": "^4.15.1",
-        "electron": "^5.0.6",
-        "electron-builder": "^21.2.0"
+        "wait-on": "^3.3.0"
     }
 }

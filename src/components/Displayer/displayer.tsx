@@ -25,6 +25,8 @@ const Displayer: React.FC<IDisplayerProps> = (props) => {
                     <Image
                         src={loadPic[0]?.name && join(app.getPath('appData'), 'membership', loadPic[0]?.name)}
                         preview={false}
+                        width="100%"
+                        height="100%"
                     />
                 </div>
 
@@ -34,6 +36,8 @@ const Displayer: React.FC<IDisplayerProps> = (props) => {
                     <Image
                         src={loadPic[1]?.name && join(app.getPath('appData'), 'membership', loadPic[1]?.name)}
                         preview={false}
+                        width="100%"
+                        height="100%"
                     />
                 </div>
 
