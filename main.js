@@ -30,12 +30,12 @@ const CACHE_PATH_ROOT = join(app.getAppPath(), 'public/cache')
 
 app.on('ready', () => {
     let mainWindow = new BrowserWindow({
-        width: 510,
-        height: 413,
-        minWidth: 510,
-        maxWidth: 510,
-        minHeight: 413,
-        maxHeight: 413,
+        // width: 510,
+        // height: 413,
+        // minWidth: 510,
+        // maxWidth: 510,
+        // minHeight: 413,
+        // maxHeight: 413,
         maximizable: false,
         webPreferences: {
             nodeIntegration: true,
