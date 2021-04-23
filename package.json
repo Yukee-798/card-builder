@@ -1,128 +1,130 @@
 {
-    "name": "card-builder",
-    "version": "1.0.0",
-    "description": "An automated production card application",
-    "author": {
-        "name": "yukee-798",
-        "email": "yukee798@gmail.com"
+  "name": "card-builder",
+  "version": "1.0.0",
+  "description": "An automated production card application",
+  "author": {
+    "name": "yukee-798",
+    "email": "yukee798@gmail.com"
+  },
+  "repository": {
+    "url": "https://github.com/Yukee-798/card-builder"
+  },
+  "private": true,
+  "main": "main.js",
+  "dependencies": {
+    "@types/dom-to-image": "^2.6.2",
+    "@types/file-saver": "^2.0.2",
+    "concurrently": "^4.1.1",
+    "cross-env": "^5.2.0",
+    "dom-to-image": "^2.6.0",
+    "electron-is-dev": "^1.1.0",
+    "file-saver": "^2.0.5"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "dev": "concurrently \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm start\"",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "prepack": "npm run build",
+    "predist": "npm run build"
+  },
+  "homepage": "./",
+  "build": {
+    "appId": "card-builder",
+    "productName": "card-builder",
+    "copyright": "Copyright © 2021 ${author}",
+    "extends": null,
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "public/**/*",
+      "main.js",
+      "./src",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "assets"
     },
-    "repository": {
-        "url": "https://github.com/Yukee-798/card-builder"
+    "publish": [
+      "github"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
     },
-    "private": true,
-    "main": "main.js",
-    "dependencies": {
-        "@types/dom-to-image": "^2.6.2",
-        "@types/file-saver": "^2.0.2",
-        "concurrently": "^4.1.1",
-        "cross-env": "^5.2.0",
-        "electron-is-dev": "^1.1.0"    
-    },
-    "scripts": {
-        "start": "react-app-rewired start",
-        "build": "react-app-rewired build",
-        "test": "react-app-rewired test",
-        "eject": "react-scripts eject",
-        "dev": "concurrently \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm start\"",
-        "pack": "electron-builder --dir",
-        "dist": "electron-builder",
-        "prepack": "npm run build",
-        "predist": "npm run build"
-    },
-    "homepage": "./",
-    "build": {
-        "appId": "card-builder",
-        "productName": "card-builder",
-        "copyright": "Copyright © 2021 ${author}",
-        "extends": null,
-        "files": [
-            "build/**/*",
-            "node_modules/**/*",
-            "public/**/*",
-            "main.js",
-            "./src",
-            "package.json"
-        ],
-        "directories": {
-            "buildResources": "assets"
+    "dmg": {
+      "background": "assets/appdmg.png",
+      "icon": "assets/icon.icns",
+      "iconSize": 100,
+      "contents": [
+        {
+          "x": 380,
+          "y": 280,
+          "type": "link",
+          "path": "/Applications"
         },
-        "publish": [
-            "github"
-        ],
-        "mac": {
-            "category": "public.app-category.productivity",
-            "artifactName": "${productName}-${version}-${arch}.${ext}"
-        },
-        "dmg": {
-            "background": "assets/appdmg.png",
-            "icon": "assets/icon.icns",
-            "iconSize": 100,
-            "contents": [{
-                    "x": 380,
-                    "y": 280,
-                    "type": "link",
-                    "path": "/Applications"
-                },
-                {
-                    "x": 110,
-                    "y": 280,
-                    "type": "file"
-                }
-            ],
-            "window": {
-                "width": 500,
-                "height": 500
-            }
-        },
-        "win": {
-            "target": [
-                "msi",
-                "nsis"
-            ],
-            "icon": "assets/icon.ico",
-            "artifactName": "${productName}-Web-Setup-${version}.${ext}",
-            "publisherName": "kjl and kll"
-        },
-        "nsis": {
-            "allowToChangeInstallationDirectory": true,
-            "oneClick": false,
-            "perMachine": false
+        {
+          "x": 110,
+          "y": 280,
+          "type": "file"
         }
+      ],
+      "window": {
+        "width": 500,
+        "height": 500
+      }
     },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
+    "win": {
+      "target": [
+        "msi",
+        "nsis"
+      ],
+      "icon": "assets/icon.ico",
+      "artifactName": "${productName}-Web-Setup-${version}.${ext}",
+      "publisherName": "kjl and kll"
     },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    },
-    "devDependencies": {
-        "@types/node": "^12.20.7",
-        "@ant-design/icons": "^4.6.2",
-        "@types/react": "^16.8.6",
-        "@types/react-dom": "^16.8.6",
-        "antd": "^4.15.1",
-        "babel-plugin-import": "^1.13.3",
-        "customize-cra": "^1.0.0",
-        "electron": "^12.0.0",
-        "electron-builder": "^21.2.0",
-        "node-sass": "^4.14.1",
-        "react": "^16.8.6",
-        "react-app-rewired": "^2.1.8",
-        "react-dom": "^16.8.6",
-        "react-scripts": "3.0.1",
-        "typescript": "^3.2.5",
-        "wait-on": "^3.3.0"
+    "nsis": {
+      "allowToChangeInstallationDirectory": true,
+      "oneClick": false,
+      "perMachine": false
     }
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^12.20.7",
+    "@ant-design/icons": "^4.6.2",
+    "@types/react": "^16.8.6",
+    "@types/react-dom": "^16.8.6",
+    "antd": "^4.15.1",
+    "babel-plugin-import": "^1.13.3",
+    "customize-cra": "^1.0.0",
+    "electron": "^12.0.0",
+    "node-sass": "^4.14.1",
+    "react": "^16.8.6",
+    "react-app-rewired": "^2.1.8",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1",
+    "typescript": "^3.2.5",
+    "wait-on": "^3.3.0"
+  }
 }
