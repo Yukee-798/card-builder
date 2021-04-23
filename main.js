@@ -27,23 +27,30 @@ const fileHelper = {
 };
 
 
+
+const CACHE_PATH_ROOT = join(app.getPath('appData'), 'card-builder', 'uploadedPic')
+
+
+
 const makeDir = (path) => {
-    fs.existsSync(path) ? '' : fs.mkdirSync(path)
+    fs.existsSync(path) ? void 0 : fs.mkdirSync(path)
 }
-makeDir(join(app.getPath('appData'), 'membership'));
 
 
-const CACHE_PATH_ROOT = join(app.getPath('appData'), 'membership')
+
 
 app.on('ready', () => {
+
+    makeDir(CACHE_PATH_ROOT);
+
     let mainWindow = new BrowserWindow({
-        width: 510,
-        height: 413,
-        minWidth: 510,
-        maxWidth: 510,
-        minHeight: 413,
-        maxHeight: 413,
-        maximizable: false,
+        // width: 510,
+        // height: 413,
+        // minWidth: 510,
+        // maxWidth: 510,
+        // minHeight: 413,
+        // maxHeight: 413,
+        // maximizable: false,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
@@ -66,7 +73,7 @@ app.on('ready', () => {
         }
     })
 
-    ipcMain.on('cacheFile', async(event, objJSON) => {
+    ipcMain.on('cacheFile', async (event, objJSON) => {
         const {
             picList,
             file
@@ -76,9 +83,6 @@ app.on('ready', () => {
             /** 如果传入的 file 存在 picList 则不进行文件写入 */
             if (!picList.map((item) => (item.name)).includes(file.name))
                 fileHelper.writeFile(join(CACHE_PATH_ROOT, file.name), await fileHelper.readFile(file.path));
-
-            // 回复给渲染进程数据
-            event.reply('fs', '拷贝文件成功！')
 
         } catch (err) {
             console.log(err);
