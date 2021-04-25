@@ -53,7 +53,12 @@ app.on('ready', () => {
     });
 
     ipcMain.on('create', (event, imgName) => {
-        mainWindow.webContents.capturePage().then(img => {
+        mainWindow.webContents.capturePage({
+            x: 53,
+            y: 65,
+            width: 404,
+            height: 255
+        }).then(img => {
             fileHelper.writeFile(join(DESKTOP_PATH, `${imgName}.png`), img.toPNG()).then(
                 () => {
                     event.reply('create_done', imgName);
