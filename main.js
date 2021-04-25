@@ -10,7 +10,6 @@ const {
 } = require('path')
 const fs = require('fs')
 
-
 const fileHelper = {
     readFile: (path) => {
         return pfs.readFile(path);
@@ -26,31 +25,25 @@ const fileHelper = {
     }
 };
 
-
-
 const CACHE_PATH_ROOT = join(app.getPath('appData'), 'card-builder', 'uploadedPic')
-
-
+const DESKTOP_PATH = app.getPath('desktop');
 
 const makeDir = (path) => {
     fs.existsSync(path) ? void 0 : fs.mkdirSync(path)
 }
-
-
-
 
 app.on('ready', () => {
 
     makeDir(CACHE_PATH_ROOT);
 
     let mainWindow = new BrowserWindow({
-        // width: 510,
-        // height: 413,
-        // minWidth: 510,
-        // maxWidth: 510,
-        // minHeight: 413,
-        // maxHeight: 413,
-        // maximizable: false,
+        width: 510,
+        height: 413,
+        minWidth: 510,
+        maxWidth: 510,
+        minHeight: 413,
+        maxHeight: 413,
+        maximizable: false,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
@@ -59,6 +52,18 @@ app.on('ready', () => {
         }
     });
 
+    ipcMain.on('create', (event, imgName) => {
+        mainWindow.webContents.capturePage().then(img => {
+            fileHelper.writeFile(join(DESKTOP_PATH, `${imgName}.png`), img.toPNG()).then(
+                () => {
+                    event.reply('create_done', imgName);
+                },
+                (err) => {
+                    console.log(err);
+                }
+            )
+        })
+    });
 
     ipcMain.on('remake', (event, picListJSON) => {
 
@@ -73,7 +78,7 @@ app.on('ready', () => {
         }
     })
 
-    ipcMain.on('cacheFile', async(event, objJSON) => {
+    ipcMain.on('cacheFile', async (event, objJSON) => {
         const {
             picList,
             file
