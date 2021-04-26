@@ -11,6 +11,9 @@ function App() {
 
   const [isPopConsole, setIsPopConsole] = useState(false);
   const [picList, setPicList] = useState<Pick<IFile, 'name' | 'path'>[]>([]);
+  const [isPhotoDisplay, setIsPhotoDisplay] = useState(false);
+  const [isBgDisplay, setIsBgDisplay] = useState(false);
+
   const inputRef = useRef(new Input({ defaultValue: '' }));
 
   useEffect(() => {
@@ -19,6 +22,17 @@ function App() {
     })
   }, [])
 
+  useEffect(() => {
+    if (picList.length === 1) {
+      setIsPhotoDisplay(true);
+    } else if (picList.length === 2) {
+      setIsBgDisplay(true);
+    } else {
+      setIsPhotoDisplay(false);
+      setIsBgDisplay(false);
+    }
+  }, [picList])
+
 
   return (
     <div className="App">
@@ -26,6 +40,8 @@ function App() {
         <Col span={24}>
           <Displayer
             loadPic={picList}
+            isBgDisplay={isBgDisplay}
+            isPhotoDisplay={isPhotoDisplay}
           />
           <Console
             isPop={isPopConsole}
@@ -54,7 +70,7 @@ function App() {
                       }, 500);
                       return false;
                     })
-                    
+
                   }
                 }
               })
@@ -66,10 +82,11 @@ function App() {
                 path: file.path,
                 name: file.name
               }
-              if (picList.length < 2)
+              if (picList.length < 2) {
                 setPicList(pre => {
                   return [...pre, mFile]
                 });
+              }
             }}
           />
           <Button

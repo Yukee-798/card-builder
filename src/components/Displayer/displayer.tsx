@@ -1,20 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IBaseProps, IFile } from '../../types';
 import { Image, Input } from 'antd'
 import './displayer.scss'
 
 interface IDisplayerProps extends IBaseProps {
-    loadPic: Pick<IFile, 'name' | 'path'>[]
+    loadPic: Pick<IFile, 'name' | 'path'>[],
+    isPhotoDisplay: boolean,
+    isBgDisplay: boolean
 }
 
 
 const Displayer: React.FC<IDisplayerProps> = (props) => {
-    const { loadPic } = props;
-
-    useEffect(() => {
-        console.log(loadPic[0]?.path && 'file://' + loadPic[0]?.path);
-    }, [loadPic])
-
+    const { loadPic, isBgDisplay, isPhotoDisplay } = props;
 
     return (
         <div
@@ -24,9 +21,9 @@ const Displayer: React.FC<IDisplayerProps> = (props) => {
 
                 <div className='owner-photo'>
                     <Image
+                        className={isPhotoDisplay ? 'photo' : 'photo-hide'}
                         src={loadPic[0] ? 'file://' + loadPic[0]?.path : undefined}
                         preview={false}
-    
                     />
                 </div>
 
@@ -34,6 +31,7 @@ const Displayer: React.FC<IDisplayerProps> = (props) => {
                 <div className='hint'>背景</div>
                 <div className='background'>
                     <Image
+                        className={isBgDisplay ? 'bg' : 'bg-hide'}
                         src={loadPic[1] ? 'file://' + loadPic[1]?.path : undefined}
                         preview={false}
                     />

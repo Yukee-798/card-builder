@@ -27,13 +27,7 @@ const fileHelper = {
 
 const DESKTOP_PATH = app.getPath('desktop');
 
-const makeDir = (path) => {
-    fs.existsSync(path) ? void 0 : fs.mkdirSync(path)
-}
-
 app.on('ready', () => {
-
-    makeDir(CACHE_PATH_ROOT);
 
     let mainWindow = new BrowserWindow({
         width: 510,
