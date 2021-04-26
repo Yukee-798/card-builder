@@ -31,8 +31,7 @@ const Console: React.FC<IConsoleProps> = (props) => {
             <div>
                 <Upload.Dragger
                     maxCount={2}
-                    customRequest={async ({ file }) => {
-                        console.log('文件上传');
+                    customRequest={({ file }) => {
                         onFileUpload?.(file as unknown as IFile);
                     }}
                     className='file-upload'

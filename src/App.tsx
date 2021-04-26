@@ -33,7 +33,6 @@ function App() {
               setIsPopConsole(false);
             }}
             onRemake={() => {
-              ipcRenderer.send('remake', JSON.stringify(picList));
               setPicList([]);
             }}
 
@@ -63,24 +62,15 @@ function App() {
 
             // 当文件数量达到2个后，继续上传文件不会再执行回调
             onFileUpload={(file) => {
-
               const mFile = {
                 path: file.path,
                 name: file.name
               }
-
               if (picList.length < 2)
                 setPicList(pre => {
-                  ipcRenderer.send('cacheFile', JSON.stringify({
-                    picList,
-                    file: mFile
-                  }));
                   return [...pre, mFile]
                 });
-
             }}
-
-
           />
           <Button
             className='float-btn'

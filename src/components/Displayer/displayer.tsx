@@ -3,13 +3,6 @@ import { IBaseProps, IFile } from '../../types';
 import { Image, Input } from 'antd'
 import './displayer.scss'
 
-const {app} = window.require('electron').remote;
-const {join} = window.require('path');
-
-
-const CACHE_PATH_ROOT = join(app.getPath('appData'), 'card-builder', 'uploadedPic')
-
-
 interface IDisplayerProps extends IBaseProps {
     loadPic: Pick<IFile, 'name' | 'path'>[]
 }
@@ -17,14 +10,12 @@ interface IDisplayerProps extends IBaseProps {
 
 const Displayer: React.FC<IDisplayerProps> = (props) => {
     const { loadPic } = props;
-    
-    useEffect(() => {
-        console.log(loadPic);   
 
-        console.log(CACHE_PATH_ROOT + '/' + loadPic[0]?.name);
-        console.log(CACHE_PATH_ROOT + '/' + loadPic[1]?.name);
-        // console.log(join(CACHE_PATH_ROOT , loadPic[0]?.name + ''));
-    })
+    useEffect(() => {
+        console.log(loadPic[0]?.path && 'file://' + loadPic[0]?.path);
+    }, [loadPic])
+
+
     return (
         <div
             className='displayer-warp'
@@ -33,11 +24,9 @@ const Displayer: React.FC<IDisplayerProps> = (props) => {
 
                 <div className='owner-photo'>
                     <Image
-                        src='./test1.JPG'
-                        // src={'/Users/yukee-798/Library/Application Support/card-builder/IMG_3691.JPG'}
+                        src={loadPic[0] ? 'file://' + loadPic[0]?.path : undefined}
                         preview={false}
-                        width="100%"
-                        height="100%"
+    
                     />
                 </div>
 
@@ -45,10 +34,8 @@ const Displayer: React.FC<IDisplayerProps> = (props) => {
                 <div className='hint'>背景</div>
                 <div className='background'>
                     <Image
-                        // src={loadPic[1]?.name && join(app.getPath('appData'), 'card-builder', loadPic[1]?.name + '')}
+                        src={loadPic[1] ? 'file://' + loadPic[1]?.path : undefined}
                         preview={false}
-                        width="100%"
-                        height="100%"
                     />
                 </div>
 

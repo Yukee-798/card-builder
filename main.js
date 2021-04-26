@@ -25,7 +25,6 @@ const fileHelper = {
     }
 };
 
-const CACHE_PATH_ROOT = join(app.getPath('appData'), 'card-builder', 'uploadedPic')
 const DESKTOP_PATH = app.getPath('desktop');
 
 const makeDir = (path) => {
@@ -64,37 +63,6 @@ app.on('ready', () => {
             )
         })
     });
-
-    ipcMain.on('remake', (event, picListJSON) => {
-
-        const picList = JSON.parse(picListJSON);
-
-        try {
-            picList.forEach((item) => {
-                fileHelper.deleteFile(join(CACHE_PATH_ROOT, item.name));
-            })
-        } catch (err) {
-            console.log(err);
-        }
-    })
-
-    ipcMain.on('cacheFile', async (event, objJSON) => {
-        const {
-            picList,
-            file
-        } = JSON.parse(objJSON);
-        try {
-
-            /** 如果传入的 file 存在 picList 则不进行文件写入 */
-            if (!picList.map((item) => (item.name)).includes(file.name))
-                fileHelper.writeFile(join(CACHE_PATH_ROOT, file.name), await fileHelper.readFile(file.path));
-
-        } catch (err) {
-            console.log(err);
-        }
-
-    })
-
 
     const urlLocation = isDev ? 'http://localhost:3000' : `file://${join(__dirname, './build/index.html')}`;
     mainWindow.loadURL(urlLocation);
