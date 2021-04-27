@@ -26,6 +26,7 @@
         z-index: 1;
     }
 
+
     .displayer-front {
         width: 404px;
         height: 255px;
@@ -88,4 +89,9 @@
         color: #eee;
         top: 20%;
     }
+}
+
+
+.border-none {
+    border: none !important;
 }

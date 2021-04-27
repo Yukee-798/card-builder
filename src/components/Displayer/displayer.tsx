@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { IBaseProps, IFile } from '../../types';
 import { Image, Input } from 'antd'
 import './displayer.scss'
@@ -17,9 +17,9 @@ const Displayer: React.FC<IDisplayerProps> = (props) => {
         <div
             className='displayer-warp'
         >
-            <div className='displayer-front' id='target-img'>
+            <div className={isBgDisplay ? 'displayer-front border-none' : 'displayer-front'} id='target-img'>
 
-                <div className='owner-photo'>
+                <div className={isPhotoDisplay ? 'owner-photo border-none' : 'owner-photo'}>
                     <Image
                         className={isPhotoDisplay ? 'photo' : 'photo-hide'}
                         src={loadPic[0] ? 'file://' + loadPic[0]?.path : undefined}
